@@ -1,0 +1,1525 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>NSBM Volunteer Club</title>
+    
+    <style>
+        /* General Reset */
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+            font-family: 'Arial', sans-serif;
+        }
+            body {
+                line-height: 1.6;
+                color: #fff;
+                background:#c9c9c9;
+                font-size: 18px;
+                font-weight: 400;
+                font-family: "-apple-system", "BlinkMacSystemFont", "Roboto", "Helvetica Neue", sans-serif !important;
+                -webkit-font-smoothing: antialiased;
+                -moz-osx-font-smoothing: grayscale;
+                
+                &.stop {
+                    overflow: hidden;
+                }
+            }
+            .section1{
+                background: black;
+            }
+            header{
+                background-color: black;
+            }
+
+            nav {
+                display: flex;
+                height: 80px;
+                justify-content: center;
+                align-items: center;
+                padding: 0 20px;
+                position: fixed;
+                left: 0;
+                right: 0;
+                width: 100%;
+                margin: 0 auto;
+                top: 0;
+                background-color: rgba(0, 0, 0, 0.6);
+                z-index: 9;
+                backdrop-filter: blur(5px);
+                border: 1px solid rgba(255,255,255,.06);
+                transition: 1s all cubic-bezier(0.075, 0.82, 0.165, 1) .2s;
+
+            
+            }
+            a{
+                color: #fff;
+                text-decoration: none;
+                display: block;
+                padding: 15px 20px;
+                line-height: 1;
+                font-size: 13px;
+                letter-spacing: 2px;
+                text-transform: uppercase;
+                
+
+            }
+                a:hover {
+                    border-bottom: 2px solid white;
+                    color: rgb(171, 171, 171);
+                }
+                        
+
+            header {
+                z-index: 99999;
+                position: relative;
+            }
+
+            .slider-container {
+                position: relative;
+                width: 100%;
+                height: 100vh; /* Full screen height */
+                overflow: hidden;
+            }
+
+            .slide {
+                display: none; /* Hide all slides by default */
+                width: 100%;
+                height: 100%;
+            }
+
+            .slide.active {
+                display: block; /* Show only the active slide */
+            }
+
+            .slide img {
+                width: 100%;
+                height: 100%;
+                object-fit: cover;
+            }
+
+            /* The Darkening Effect */
+            .dark-overlay {
+                position: absolute;
+                top: 0;
+                left: 0;
+                width: 100%;
+                height: 100%;
+                background-color: rgba(0, 0, 0, 0.5); /* Adjust 0.5 for more/less darkness */
+                z-index: 1;
+            }
+
+            /* Navigation Buttons */
+            .prev, .next {
+                position: absolute;
+                top: 50%;
+                transform: translateY(-50%);
+                background-color: rgba(255, 255, 255, 0.3);
+                color: white;
+                padding: 15px;
+                border: none;
+                cursor: pointer;
+                z-index: 10;
+                font-size: 24px;
+                border-radius: 50%;
+                transition: 0.3s;
+            }
+
+            .prev:hover, .next:hover {
+                background-color: rgba(255, 255, 255, 0.6);
+            }
+
+            .prev { left: 20px; }
+            .next { right: 20px; }
+
+            /*slider text*/
+            .slider-text{
+                position: absolute;
+                top: 60%;
+                left: 7%;
+                padding: 15px;
+                z-index: 10;
+                font-size: 20px;
+                opacity: 0;
+                animation: fadeInUp 0.8s ease-out forwards;
+                animation-delay: 0.3s;
+            }
+            .h-1{
+                font-family:'Lucida Sans', 'Lucida Sans Regular', 'Lucida Grande', 'Lucida Sans Unicode', Geneva, Verdana, sans-serif;
+                font-size: 35px;
+                color: rgb(255, 255, 255);
+            }
+            .h-2{
+                font-family:'Lucida Sans', 'Lucida Sans Regular', 'Lucida Grande', 'Lucida Sans Unicode', Geneva, Verdana, sans-serif;
+                font-size: 20px;
+                font-weight: 80px;
+                color: #d2d2d2;
+            }
+
+            @keyframes fadeInUp {
+                from {
+                opacity: 0;
+                transform: translateY(100px);
+                }
+                to {
+                opacity: 1;
+                transform: translateY(0);
+                }
+            }
+         
+
+
+
+
+
+
+
+
+            
+
+
+
+
+            #section2 {
+                position: relative;
+                padding: 100px 5%;
+                display: flex;
+                align-items: center;
+                min-height: 80vh;
+                overflow: hidden;
+                opacity: 0; /* Hidden initially */
+                transform: translateY(50px); /* Positioned slightly down */
+                transition: all 0.8s ease-out; /* Smooth entrance */
+            }
+
+            /* When the "active" class is added by JS */
+            #section2.active {
+                opacity: 1;
+                transform: translateY(0);
+            }
+
+            /* The Trapezium Background */
+            .trapezium-bg {
+                position: absolute;
+                top: 0;
+                left: 0;
+                width: 50%;
+                height: 100%;
+                background: radial-gradient( rgb(0, 56, 75), rgb(0, 0, 0) ); /* Club Primary Color */
+                clip-path: polygon(0 0, 100% 0, 0% 100%, 0% 100%);
+                z-index: -1;
+            }
+
+
+            .content-wrapper {
+                display: flex;
+                align-items: center;
+                gap: 40px;
+                width: 100%;
+
+                
+            }
+
+            /* Rectangle Image Box */
+            .image-box {
+                flex: 1;
+                max-width: 250px;
+                height: 350px;
+                background: #333;
+                border-radius: 8px;
+                overflow: hidden;
+                box-shadow: 0 10px 30px rgba(0,0,0,0.2);
+            }
+
+            .image-box img {
+                width: 100%;
+                height: 100%;
+                object-fit: cover;
+            }
+
+            /* Paragraph Space */
+            .text-box {
+                flex: 1;
+                color: #333;
+            }
+
+            .text-box h2 {
+                font-size: 2.5rem;
+                margin-bottom: 20px;
+            }
+
+            /* Responsive Fix */
+            @media (max-width: 768px) {
+                .content-wrapper {
+                    flex-direction: column;
+                }
+                .trapezium-bg {
+                    width: 100%;
+                    clip-path: polygon(0 0, 100% 0, 100% 90%, 0% 100%);
+                }
+            }
+
+            .member-btn{
+
+                padding: 1em 2em;
+                border: none;
+                border-radius: 5px;
+                font-weight: bold;
+                letter-spacing: 5px;
+                text-transform: uppercase;
+                cursor: pointer;
+                color: #00252c;
+                transition: all 1000ms;
+                font-size: 15px;
+                position: absolute;
+                left: 70%;
+                top: 90%;
+                overflow: hidden;
+                outline: 2px solid #000000;
+                }
+            .member-btn:hover {
+                color: #ffffff;
+                transform: scale(1.1);
+                outline: 2px solid #ffffff;
+                box-shadow: 4px 5px 17px -4px #063c44;
+                }
+
+                .member-btn::before {
+                content: "";
+                position: absolute;
+                left: -50px;
+                top: 0;
+                width: 0;
+                height: 100%;
+                background-color: #04424d;
+                transform: skewX(45deg);
+                z-index: -1;
+                transition: width 1000ms;
+                }
+
+                .member-btn:hover::before {
+                width: 250%;
+                }
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+            #section3 {
+                position: relative;
+                min-height: auto;
+                display: flex;
+                flex-direction: column; /* Stack the stats card and VM cards vertically */
+                align-items: center;    /* Center items horizontally */
+                justify-content: center; /* Center items vertically */
+                overflow: hidden;
+                padding: 100px 0;
+            }
+
+            /* Right-aligned Trapezium */
+            .trapezium-bg-right {
+                position: absolute;
+                top: 0;
+                right: 0;
+                width: 60%;
+                height: 100%;
+                background: linear-gradient(black , rgb(0, 84, 91)
+                ); /* A different club color, e.g., Green for Mission/Vision */
+                clip-path: polygon(100% 0%, 100% 0%, 100% 100%, 0% 100%);
+                z-index: -1;
+                transform: translateX(100px); /* Start slightly off-screen */
+                opacity: 0;
+                transition: all 1s ease-out;
+            }
+
+            /* Container positioning */
+           .stats-container {
+                display: flex;
+                justify-content: center;
+                width: 100%;
+                padding: 0 5% 50px 5%; 
+                margin: 0 auto;
+                opacity: 0;
+                transform: translateY(40px);
+                transition: all 1.2s cubic-bezier(0.22, 1, 0.36, 1);
+            }
+
+            .stats-container.active {
+                opacity: 1;
+                transform: translateY(0);
+            }
+
+            /* Single Card Styling */
+            .modern-stat-card {
+                background: rgba(255, 255, 255, 0.95);
+                backdrop-filter: blur(10px);
+                border: 1px solid rgba(255, 255, 255, 0.2);
+                border-radius: 24px;
+                padding: 10px;
+                max-width: 900px;
+                width: 70%;
+                box-shadow: 0 20px 40px rgba(0, 0, 0, 0.1);
+                text-align: center;
+                opacity: 0.9;
+            }
+
+            .stat-text-content h2 {
+                color: #1a1a1a;
+                font-size: 2rem;
+                text-transform: uppercase;
+                letter-spacing: 2px;
+                margin-bottom: 15px;
+            }
+
+            .stat-text-content p {
+                color: #555;
+                font-size: 1.1rem;
+                line-height: 1.6;
+                margin-bottom: 40px;
+                max-width: 700px;
+                margin-left: auto;
+                margin-right: auto;
+            }
+
+            /* Numbers Row */
+            .stat-numbers-row {
+                display: flex;
+                align-items: center;
+                justify-content: space-around;
+                border-top: 1px solid #eee;
+                padding-top: 40px;
+            }
+
+            .number-wrapper {
+                display: flex;
+                align-items: center;
+                justify-content: center;
+                color: #00545b; /* Theme color from your section 3 */
+            }
+
+            .stat-counter {
+                font-size: 3.5rem;
+                font-weight: 800;
+                margin: 0;
+            }
+
+            .plus-sign {
+                font-size: 2.5rem;
+                font-weight: 800;
+                margin-left: 5px;
+            }
+
+            .stat-item p {
+                margin-top: 5px;
+                color: #888;
+                font-weight: 700;
+                text-transform: uppercase;
+                font-size: 0.85rem;
+                letter-spacing: 1px;
+            }
+
+            .divider {
+                width: 1px;
+                height: 80px;
+                background: #eee;
+            }
+
+            /* Mobile Responsive */
+            @media (max-width: 768px) {
+                .stat-numbers-row {
+                    flex-direction: column;
+                    gap: 30px;
+                }
+                .divider {
+                    display: none;
+                }
+                .modern-stat-card {
+                    padding: 30px;
+                }
+            }
+
+            /* Container for Cards */
+           .vm-container {
+                display: flex;
+                flex-wrap: wrap;       /* Allow cards to wrap on smaller screens */
+                gap: 30px;
+                width: 100%;
+                justify-content: center; /* Centering the cards horizontally */
+                max-width: 1200px;      /* Prevents cards from spreading too far on wide screens */
+                margin: 0 auto;
+            }
+
+            /* Card Styling */
+            .vm-card {
+                
+                padding: 40px;
+                border-radius: 20px;
+                box-shadow: 0 15px 35px rgba(0,0,0,0.1);
+                flex: 1;
+                max-width: 450px;
+                text-align: center;
+                background-color: rgba(255, 255, 255, 0.9);
+                opacity: 0;
+                transform: translateY(50px);
+                transition: all 0.8s ease-out;
+            }
+
+            .vm-card h3 {
+                margin: 20px 0;
+                font-size: 1.8rem;
+                color: #222;
+            }
+
+            .icon-circle {
+                width: 70px;
+                height: 70px;
+                background: #f0f0f0;
+                border-radius: 50%;
+                display: flex;
+                align-items: center;
+                justify-content: center;
+                font-size: 2rem;
+                margin: 0 auto;
+            }
+
+            /* Scroll Animation Trigger Classes */
+            #section3.active .trapezium-bg-right {
+                transform: translateX(0);
+                opacity: 1;
+            }
+
+            #section3.active .vm-card {
+                opacity: 1;
+                transform: translateY(0);
+            }
+
+            /* Staggered delay for the second card */
+            #section3.active .mission {
+                transition-delay: 0.3s;
+            }
+
+            /* Mobile Responsive */
+            @media (max-width: 768px) {
+                .vm-container {
+                    flex-direction: column;
+                    align-items: center;
+                }
+                .trapezium-bg-right {
+                    width: 100%;
+                    clip-path: polygon(0 15%, 100% 0%, 100% 100%, 0% 100%);
+                }
+            }
+            p{
+                color: black;
+            }
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+            #section4 {
+                position: relative;
+                padding: 100px 5%;
+                
+                overflow: hidden;
+            }
+
+            /* Trapezium Top Right Background */
+            .trapezium-top-right {
+                position: absolute;
+                top: 0;
+                right: 0;
+                width: 40%;
+                height: 300px;
+                background: radial-gradient(black, rgb(0, 70, 53)); /* Subtle light grey */
+                clip-path: polygon(100% 0, 100% 100%, 0 0);
+                z-index: 1;
+                opacity: 0;
+                transform: translateY(-50px);
+                transition: 1s ease;
+            }
+
+            .section-title {
+                position: relative;
+                z-index: 2;
+                margin-bottom: 50px;
+                text-align: left;
+            }
+
+            /* Horizontal Grid (X-Axis) */
+            .news-grid {
+                display: flex;
+                gap: 20px;
+                justify-content: space-between;
+                position: relative;
+                z-index: 2;
+            }
+
+            .news-card {
+                flex: 1;
+                background: white;
+                border-radius: 12px;
+                box-shadow: 0 5px 15px rgba(0,0,0,0.05);
+                overflow: hidden;
+                opacity: 0;
+                transform: translateY(40px);
+                transition: all 0.6s ease;
+            }
+
+            .news-img {
+                position: relative;
+                height: 180px;
+            }
+
+            .news-img img {
+                width: 100%;
+                height: 100%;
+                object-fit: cover;
+            }
+
+            .news-date {
+                position: absolute;
+                bottom: 10px;
+                left: 10px;
+                background: #007bff;
+                color: white;
+                padding: 5px 10px;
+                font-size: 0.8rem;
+                border-radius: 4px;
+            }
+
+            .news-content {
+                padding: 20px;
+            }
+
+            .news-content h4 {
+                margin-bottom: 10px;
+                color: #333;
+            }
+
+            .news-content p {
+                font-size: 0.9rem;
+                color: #666;
+                margin-bottom: 15px;
+            }
+
+            .read-more {
+                text-decoration: none;
+                color: #007bff;
+                font-weight: bold;
+                font-size: 0.85rem;
+            }
+
+            /* Scroll Animation Trigger */
+            #section4.active .trapezium-top-right {
+                opacity: 1;
+                transform: translateY(0);
+            }
+
+            #section4.active .news-card {
+                opacity: 1;
+                transform: translateY(0);
+            }
+
+            /* Staggered Delay for Cards */
+            #section4.active .news-card:nth-child(1) { transition-delay: 0.1s; }
+            #section4.active .news-card:nth-child(2) { transition-delay: 0.2s; }
+            #section4.active .news-card:nth-child(3) { transition-delay: 0.3s; }
+            #section4.active .news-card:nth-child(4) { transition-delay: 0.4s; }
+
+            /* Responsive: Stack on mobile */
+            @media (max-width: 992px) {
+                .news-grid {
+                    flex-wrap: wrap;
+                }
+                .news-card {
+                    flex: 0 0 calc(50% - 20px); /* 2 per row on tablets */
+                }
+            }
+
+            @media (max-width: 600px) {
+                .news-card {
+                    flex: 0 0 100%; /* 1 per row on mobile */
+                }
+            }
+            /* Modal Background */
+            .modal {
+                display: none; 
+                position: fixed; 
+                z-index: 10000; 
+                left: 0;
+                top: 0;
+                width: 100%; 
+                height: 100%; 
+                background-color: rgba(0,0,0,0.8); 
+                backdrop-filter: blur(8px);
+            }
+
+            /* Modal Box */
+            .modal-content {
+                background-color: #fff;
+                margin: 5% auto; 
+                width: 80%; 
+                max-width: 800px;
+                border-radius: 15px;
+                font-size: 20px;
+                overflow: hidden;
+                position: relative;
+                animation: zoomIn 0.3s ease;
+            }
+
+            @keyframes zoomIn {
+                from {transform: scale(0.8); opacity: 0;}
+                to {transform: scale(1); opacity: 1;}
+            }
+
+            .close-modal {
+                position: absolute;
+                top: 10px;
+                right: 25px;
+                color: #fff;
+                font-size: 25px;
+                font-weight: bold;
+                cursor: pointer;
+                z-index: 10;
+                text-shadow: 0 0 10px rgba(0,0,0,0.5);
+            }
+
+            #modalImg {
+                width: 100%;
+                height: 400px;
+                object-fit: cover;
+            }
+
+            .modal-body {
+                padding: 30px;
+                color: #333;
+            }
+
+            .news-date-tag {
+                background: #007bff;
+                color: white;
+                padding: 5px 15px;
+                border-radius: 5px;
+                font-size: 0.9rem;
+            }
+
+            #modalTitle {
+                margin-top: 15px;
+                font-size: 25px;
+            }
+
+            #modalDescription {
+                margin-top: 15px;
+                font-size: 15px;
+                line-height: 1.8;
+            }
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+            /* Footer Styling */
+            .main-footer {
+                background: linear-gradient(black , rgb(0, 44, 62) );
+                color: #ffffff;
+                padding: 60px 10% 20px 10%;
+                margin-top: 50px;
+            }
+
+            .footer-container {
+                display: flex;
+                justify-content: space-between;
+                gap: 40px;
+                flex-wrap: wrap;
+            }
+
+            .footer-col {
+                flex: 1;
+                min-width: 150px;
+            }
+
+            .footer-col h3 {
+                font-size: 1.5rem;
+                margin-bottom: 20px;
+                color: #007bff; /* Accent color */
+                text-transform: uppercase;
+                letter-spacing: 1px;
+            }
+
+            .footer-col p {
+                color: #b3b3b3;
+                line-height: 1.8;
+                font-size: 0.95rem;
+            }
+
+            .footer-links {
+                list-style: none;
+                padding: 0;
+            }
+
+            .footer-links li {
+                margin-bottom: 12px;
+            }
+
+            .footer-links a {
+                color: #b3b3b3;
+                text-decoration: none;
+                transition: 0.3s;
+                font-size: 0.95rem;
+                padding: 0; /* Removing padding from previous 'a' styles */
+                display: inline;
+            }
+
+            .footer-links a:hover {
+                color: #ffffff;
+                border-bottom: 1px solid #ffffff;
+            }
+
+            .footer-bottom {
+                text-align: center;
+                margin-top: 40px;
+                padding-top: 20px;
+                border-top: 1px solid rgba(255, 255, 255, 0.1);
+            }
+
+            .footer-bottom p {
+                font-size: 0.8rem;
+                color: #777;
+            }
+            .f-links{
+                margin: 3px;
+            }
+            /* Responsive Footer */
+            @media (max-width: 768px) {
+                .footer-container {
+                    flex-direction: column;
+                    text-align: center;
+                }
+                .footer-col {
+                    margin-bottom: 30px;
+                }
+            }
+            h3{
+                color: #ffffff;
+            }
+    </style>
+</head>
+<body>
+    <section class="section1">
+        <header>
+           
+             <nav>
+               <a href="index.html">home</a>
+                <a href="Gallery.html">gallery</a>
+                <a href="About.html">about</a>      
+            </nav>
+            
+            <div class="slider-container">
+                <button class="prev" onclick="moveSlide(-1)">&#10094;</button>
+                <button class="next" onclick="moveSlide(1)">&#10095;</button>
+                <div class="slider-text">
+                    <h1 class="h-1">NSBM <br> VOLUNTEER CLUB</h1>
+                    <h2 class="h-2">WORK FOR A CAUSE. NOT FOR APPLAUSE</h2>
+                </div>
+                <div class="slider">
+                    <div class="slide active">
+                        <div class="dark-overlay"></div>
+                        <img src="IMG-20250519-WA0012.jpg" alt="NSBM Event 1">
+                        
+                    </div>
+
+                    <div class="slide">
+                        <div class="dark-overlay"></div>
+                        <img src="IMG-20251019-WA0005.jpg" alt="NSBM Event 2">
+                       
+                    </div>
+
+                    <div class="slide">
+                        <div class="dark-overlay"></div>
+                        <img src="IMG-20251124-WA0038.jpg" alt="NSBM Event 3">
+                        
+                    </div>
+                </div>
+            </div>
+        </header>
+    </section>
+
+    
+
+
+
+
+
+    <section id="section2" class="reveal-section">
+        
+            <div class="trapezium-bg"></div>
+            
+             
+    
+                <div class="content-wrapper">
+                    <div class="trapezium-bg1"></div>
+                    <div class="image-box">
+                        <img  src="Screenshot_20251227_000313_Instagram.jpg" alt="Volunteer Work">
+                    </div>
+                    
+                    <div class="text-box">
+                        <h2 style="color: #000000;">From President</h2>
+                        <p>
+                            The NSBM Volunteer Club is dedicated to fostering a spirit of 
+                            selfless service among students. We believe in taking <br> action 
+                            to improve our community through various social and environmental 
+                            projects. Join us to make a lasting impact.
+                        </p>
+                    </div>
+                    <button class="member-btn">Meet Our Members</button>
+                </div>
+            </div>
+        
+    </section>
+
+
+
+
+
+
+    
+<section id="section3" class="reveal-section">
+
+    <div class="trapezium-bg-right"></div>
+    <div class="stats-container reveal-stat">
+    <div class="modern-stat-card">
+        <div class="stat-text-content">
+            <h2>Our Growing Community</h2>
+            <p>We are a biggest club in the NSBM Green University, and we have a growing family of dedicated volunteers committed to driving selfless change across the nation.</p>
+        </div>
+
+        <div class="stat-numbers-row">
+            <div class="stat-item">
+                <div class="number-wrapper">
+                    <h2 class="stat-counter" data-target="150">0</h2>
+                    <span class="plus-sign">+</span>
+                </div>
+                <p>Active Members</p>
+            </div>
+
+            <div class="divider"></div>
+
+            <div class="stat-item">
+                <div class="number-wrapper">
+                    <h2 class="stat-counter" data-target="1000">0</h2>
+                    <span class="plus-sign">+</span>
+                </div>
+                <p>Total Members</p>
+            </div>
+        </div>
+    </div>
+</div>
+    <br>
+    <br>
+    <div class="vm-container">
+        <div class="vm-card vision">
+            
+            <h3>Our Vision</h3>
+            <p>To be the leading student volunteer body in Sri Lanka, inspiring a generation of socially responsible leaders who drive sustainable change.</p>
+        </div>
+
+        <div class="vm-card mission">
+            
+            <h3>Our Mission</h3>
+            <p>To empower NSBM students through meaningful volunteer opportunities, fostering community development and personal growth through selfless service.</p>
+        </div>
+    </div>
+</section>
+
+
+
+
+
+
+
+
+<section id="section4" class="reveal-section">
+    <div class="trapezium-top-right"></div>
+
+    <div class="section-title">
+        <h2 style="color: black;">Latest News & Updates</h2>
+        
+    </div>
+
+    <div class="news-grid">
+        <article class="news-card">
+            <div class="news-img">
+                <img src="IMG-20251019-WA0005.jpg" alt="News 1">
+                <span class="news-date">24 Dec</span>
+            </div>
+            <div class="news-content">
+                <h4>Beach Cleanup 2024</h4>
+                <p>Our team successfully collected over 500kg of plastic waste...</p>
+                
+            </div>
+        </article>
+
+        <article class="news-card">
+            <div class="news-img">
+                <img src="wallpapersden.com_hd-moon-over-dark-mystic-forest_3840x2160.jpg" alt="News 2">
+                <span class="news-date">15 Dec</span>
+            </div>
+            <div class="news-content">
+                <h4>Blood Donation Drive</h4>
+                <p>Joining hands with the National Blood Center to save lives...</p>
+                
+            </div>
+        </article>
+
+        <article class="news-card">
+            <div class="news-img">
+                <img src="IMG-20250519-WA0012.jpg" alt="News 3">
+                <span class="news-date">02 Dec</span>
+            </div>
+            <div class="news-content">
+                <h4>School Supply Donation</h4>
+                <p>Providing essential stationery to rural schools in the area...</p>
+                
+            </div>
+        </article>
+
+        <article class="news-card">
+            <div class="news-img">
+                <img src="IMG-20251124-WA0038.jpg" alt="News 4">
+                <span class="news-date">28 Nov</span>
+            </div>
+            <div class="news-content">
+                <h4>New Member Orientation</h4>
+                <p>Welcoming the newest batch of volunteers to the NSBM family...</p>
+                
+            </div>
+        </article>
+    </div>
+</section>
+<div id="newsModal" class="modal">
+    <div class="modal-content">
+        <span class="close-modal">&times;</span>
+        <img id="modalImg" src="" alt="News Image">
+        <div class="modal-body">
+            <span id="modalDate" class="news-date-tag"></span>
+            <h2 id="modalTitle"></h2>
+            <p id="modalDescription"></p>
+        </div>
+    </div>
+</div>
+
+
+
+
+
+
+
+<footer class="main-footer">
+    <div class="footer-container">
+        <div class="footer-col">
+            <h3>NSBM Volunteer Club</h3>
+            <p>Empowering the youth to serve the community through dedication, passion, and selfless action. Join us in making the world a better place, one project at a time.</p>
+            <div class="footer-logo">
+                </div>
+        </div>
+
+        <div class="footer-col">
+            <h3>Quick Links</h3>
+            <ul class="footer-links">
+                <li><a href="index.html">Home</a></li>
+                <li><a href="Gallery.html">Gallery</a></li>
+                <li><a href="About.html">About</a></li>
+                
+            </ul>
+           
+        </div>
+        <div class="footer-col">
+            <h3>Follow Us</h3>
+            <ul class="footer-links">
+                
+                <a class="f-links" href=""><img style="width: 30px;" src="instagram_174855.png" alt=""></a>
+                <a class="f-links" href=""><img style="width: 30px;" src="tik-tok_3046121.png" alt=""></a>
+                <a class="f-links" href=""><img style="width: 30px;" src="connection_15047316.png" alt=""></a>
+                <a class="f-links" href=""><img style="width: 30px;" src="facebook.png" alt=""></a>
+               
+            </ul>
+        </div>
+
+         <div class="footer-col">
+            <h3>Contact Us</h3>
+            <ul class="footer-links">
+                
+                <li><h5>✉︎ info@nsbmvolunteersclub.org </h5></li>
+                <li><h5>➤NSBM Volunteer Club,
+                    2nd Floor Student Center,
+                    NSBM Green University,
+                    Pitipana, Homagama,
+                    Sri Lanka.</h5> </li>
+               
+            </ul>
+        </div>
+    </div>
+    
+    <div class="footer-bottom">
+        <p>&copy; 2026 NSBM Volunteer Club. All Rights Reserved.</p>
+        
+    </div>
+</footer>
+    
+
+    <script>
+     
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+        let currentSlide = 0;
+        const slides = document.querySelectorAll('.slide');
+
+        function showSlide(index) {
+            // Remove 'active' class from all slides
+            slides.forEach(slide => slide.classList.remove('active'));
+            
+            // Reset to start if at the end, or go to end if at the start
+            if (index >= slides.length) currentSlide = 0;
+            if (index < 0) currentSlide = slides.length - 1;
+            
+            // Add 'active' class to the target slide
+            slides[currentSlide].classList.add('active');
+        }
+
+        function moveSlide(step) {
+            currentSlide += step;
+            showSlide(currentSlide);
+        }
+
+        // Optional: Auto-play every 5 seconds
+        setInterval(() => moveSlide(1), 5000);
+
+
+
+
+        const observerOptions = {
+    threshold: 0.2 // Trigger when 20% of the section is visible
+};
+
+const observer = new IntersectionObserver((entries) => {
+    entries.forEach(entry => {
+        if (entry.isIntersecting) {
+            entry.target.classList.add('active');
+        }
+    });
+}, observerOptions);
+
+// Target Section 2
+const section2 = document.querySelector('#section2');
+observer.observe(section2);
+
+
+
+ // Intersection Observer to trigger reveal and animation
+    const statsObserver = new IntersectionObserver((entries) => {
+        entries.forEach(entry => {
+            if (entry.isIntersecting) {
+                entry.target.classList.add('active');
+                animateMemberCounters();
+                statsObserver.unobserve(entry.target);
+            }
+        });
+    }, { threshold: 0.3 });
+
+    statsObserver.observe(document.querySelector('.stats-container'));
+
+    function animateMemberCounters() {
+        const counters = document.querySelectorAll('.stat-counter');
+        const speed = 150; 
+
+        counters.forEach(counter => {
+            const updateCount = () => {
+                const target = +counter.getAttribute('data-target');
+                const count = +counter.innerText;
+                const increment = target / speed;
+
+                if (count < target) {
+                    counter.innerText = Math.ceil(count + increment);
+                    setTimeout(updateCount, 15);
+                } else {
+                    counter.innerText = target;
+                }
+            };
+            updateCount();
+        });
+    }
+
+
+
+
+
+
+
+
+
+
+
+
+// Add this to your existing observer script
+const section3 = document.querySelector('#section3');
+observer.observe(section3);
+
+const section4 = document.querySelector('#section4');
+observer.observe(section4);
+
+
+
+
+
+
+
+
+
+
+
+const modal = document.getElementById("newsModal");
+const closeModal = document.querySelector(".close-modal");
+
+// Select all news cards
+document.querySelectorAll('.news-card').forEach(card => {
+    card.style.cursor = "pointer"; // Make it look clickable
+    
+    card.addEventListener('click', () => {
+        // Get data from the clicked card
+        const img = card.querySelector('img').src;
+        const date = card.querySelector('.news-date').innerText;
+        const title = card.querySelector('h4').innerText;
+        const desc = card.querySelector('p').innerText;
+
+        // Fill the modal
+        document.getElementById('modalImg').src = img;
+        document.getElementById('modalDate').innerText = date;
+        document.getElementById('modalTitle').innerText = title;
+        document.getElementById('modalDescription').innerText = desc + " More detailed content regarding this specific event can be placed here. This window provides a focused view for your club members to read the full update.";
+
+        // Show the modal
+        modal.style.display = "block";
+        document.body.style.overflow = "hidden"; // Prevent background scrolling
+    });
+});
+
+// Close modal when clicking 'X'
+closeModal.onclick = () => {
+    modal.style.display = "none";
+    document.body.style.overflow = "auto";
+};
+
+// Close modal when clicking outside of it
+window.onclick = (event) => {
+    if (event.target == modal) {
+        modal.style.display = "none";
+        document.body.style.overflow = "auto";
+    }
+};
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+//mobile responsive
+
+
+
+document.addEventListener('DOMContentLoaded', () => {
+    const nav = document.querySelector('nav');
+    const navLinks = document.querySelectorAll('.nav-list a');
+    const sliderContainer = document.querySelector('.slider-container');
+    const sliderTexts = document.querySelectorAll('.slider-text');
+    const slides = document.querySelectorAll('.slide img');
+
+    const applyMobileFixes = () => {
+        const isMobile = window.innerWidth <= 768;
+
+        if (isMobile) {
+            // 1. Shrink Nav Bar
+            if (nav) nav.style.height = '50px';
+            navLinks.forEach(link => { link.style.fontSize = '12px'; });
+
+            // 2. Fix Slider & Remove Black Space
+            if (sliderContainer) {
+                sliderContainer.style.height = '250px'; // Set a fixed height for mobile
+                sliderContainer.style.width = '100%';
+                sliderContainer.style.overflow = 'hidden';
+            }
+
+            slides.forEach(img => {
+                img.style.height = '300px'; // Match container height
+                img.style.objectFit = 'cover';
+            });
+
+            // 3. Move Text ONTO the Slide
+            sliderTexts.forEach(text => {
+                text.style.position = 'absolute';
+                text.style.top = '50%';         // Center vertically
+                text.style.left = '5%';        // Center horizontally
+                text.style.transform = 'translate(-50%, -50%)';
+                text.style.width = '90%';
+                text.style.textAlign = 'center';
+                text.style.zIndex = '10';       // Ensure it stays above image
+                text.style.background = 'transparent'; // Remove any block backgrounds
+
+                const h1 = text.querySelector('h1');
+                const h2 = text.querySelector('h2');
+                if (h1) {
+                    h1.style.fontSize = '20px';
+                    h1.style.margin = '0';
+                    h1.style.textShadow = '2px 2px 4px rgba(0,0,0,0.7)'; // Make text readable
+                }
+                if (h2) {
+                    h2.style.fontSize = '12px';
+                    h2.style.textShadow = '1px 1px 3px rgba(0,0,0,0.7)';
+                }
+            });
+
+        } else {
+            // Reset to Desktop (Original Styles)
+            if (nav) nav.style.height = '80px';
+            if (sliderContainer) sliderContainer.style.height = '100vh';
+            slides.forEach(img => { img.style.height = '100vh'; });
+            sliderTexts.forEach(text => {
+                text.style.position = 'absolute';
+                text.style.top = '60%';
+                text.style.transform = 'none';
+                const h1 = text.querySelector('h1');
+                if (h1) h1.style.fontSize = '50px';
+            });
+        }
+    };
+
+    applyMobileFixes();
+    window.addEventListener('resize', applyMobileFixes);
+});
+
+
+
+
+//section 2 mobile responsive
+
+const applySection2MobileFixes = () => {
+    const isMobile = window.innerWidth <= 768;
+    
+    // Select Section 2 elements
+    const trapeziumBg = document.querySelector('.trapezium-bg');
+    const contentWrapper = document.querySelector('.content-wrapper');
+    const imageBox = document.querySelector('.image-box');
+    const textBox = document.querySelector('.text-box');
+    const memberBtn = document.querySelector('.member-btn');
+    const aboutImg = document.querySelector('.image-box img');
+
+    if (isMobile) {
+        // 1. Fix Background: Reduce height so it doesn't push elements down
+        if (trapeziumBg) {
+            trapeziumBg.style.width = '100%';
+            trapeziumBg.style.height = '250px'; 
+            trapeziumBg.style.position = 'absolute';
+            trapeziumBg.style.top = '0';
+            trapeziumBg.style.clipPath = 'polygon(0 0, 100% 0, 0% 100%, 0% 100%)';
+            
+        }
+
+        // 2. Fix Layout: Stack items and center them
+        if (contentWrapper) {
+            contentWrapper.style.display = 'flex';
+            contentWrapper.style.flexDirection = 'column';
+            contentWrapper.style.alignItems = 'center';
+            contentWrapper.style.padding = '20px';
+            contentWrapper.style.gap = '20px';
+        }
+
+        // 3. Shrink Image: Prevent it from taking too much space
+        if (imageBox) {
+            imageBox.style.width = 'auto'; 
+            imageBox.style.height = '50%';
+            imageBox.style.top = '0';
+            imageBox.style.borderRadius ='24px';
+        }
+        if (aboutImg) {
+            aboutImg.style.width = '100%';
+            aboutImg.style.height = 'auto';
+            aboutImg.style.borderRadius = '15px';
+        }
+
+        // 4. Center Button: Fix the "cutting" and "right-side" issue
+        if (memberBtn) {
+            memberBtn.style.display = 'block';
+            memberBtn.style.margin = '40px auto'; // Centers horizontally with space
+            memberBtn.style.position = 'relative';
+            memberBtn.style.left = '0';
+            memberBtn.style.transform = 'none';
+            memberBtn.style.width = 'fit-content';
+            memberBtn.style.clear = 'both';
+        }
+
+        // 5. Adjust Text Box
+        if (textBox) {
+            textBox.style.width = '100%';
+            textBox.style.textAlign = 'center';
+            textBox.style.color = '#333'; // Ensure visibility
+        }
+
+    } 
+};
+
+// Execute and listen for window changes
+window.addEventListener('resize', applySection2MobileFixes);
+applySection2MobileFixes();
+
+
+
+
+
+//section 3 mobile responsive
+const applySection3MobileFixes = () => {
+    const isMobile = window.innerWidth <= 768;
+    
+    // Select Section 3 elements
+    const trapeziumBgRight = document.querySelector('.trapezium-bg-right');
+    const statNumbersRow = document.querySelector('.stat-numbers-row');
+    const statItems = document.querySelectorAll('.stat-item');
+    const modernStatCard = document.querySelector('.modern-stat-card');
+
+    if (isMobile) {
+        // 1. Fix Trapezium Background (Right side)
+        if (trapeziumBgRight) {
+            trapeziumBgRight.style.width = '100%';
+            trapeziumBgRight.style.height = '100%';
+            trapeziumBgRight.style.position = 'absolute';
+            trapeziumBgRight.style.top = '0';
+            trapeziumBgRight.style.right = '0';
+            // Shape: Slanted from top-right to bottom-left
+            trapeziumBgRight.style.clipPath = 'polygon(100% 0%, 100% 0%, 100% 100%, 0% 100%)';
+            trapeziumBgRight.style.zIndex = '-1';
+        }
+
+        // 2. Increase Stat-Numbers-Row Width & Justify
+        if (statNumbersRow) {
+            statNumbersRow.style.width = '100%';       // Increased width
+            statNumbersRow.style.display = 'flex';
+            statNumbersRow.style.flexDirection = 'row'; // Keep them side-by-side on mobile
+            statNumbersRow.style.justifyContent = 'space-around'; // Justify contents
+            statNumbersRow.style.alignItems = 'center';
+            statNumbersRow.style.padding = '10px 0';
+        }
+
+        // 3. Adjust Stat Items for better spacing
+        statItems.forEach(item => {
+            item.style.flex = '1';
+            item.style.textAlign = 'center';
+            
+            const counter = item.querySelector('.stat-counter');
+            if (counter) counter.style.fontSize = '2rem'; // Shrink numbers slightly for mobile
+        });
+
+        // 4. Ensure the main card is wide enough
+        if (modernStatCard) {
+            modernStatCard.style.width = '95%';
+            modernStatCard.style.padding = '20px 10px';
+            modernStatCard.style.margin = '0 auto';
+        }
+
+    } 
+};
+
+// Run on load and resize
+window.addEventListener('resize', applySection3MobileFixes);
+applySection3MobileFixes();
+
+
+const applySection4MobileFixes = () => {
+    const isMobile = window.innerWidth <= 768;
+    
+    // Select Section 3 elements
+    const newscrd = document.querySelector('.news-card');
+    const statNumbersRow = document.querySelector('.stat-numbers-row');
+    
+    if (isMobile) {
+        // 1. Fix Trapezium Background (Right side)
+        if (newscrd) {
+            newscrd.style.width = '100%';
+            newscrd.style.height = '90%';
+            newscrd.style.top = '20px';
+           
+        }
+
+       
+    } 
+};
+
+// Run on load and resize
+window.addEventListener('resize', applySection3MobileFixes);
+applySection4MobileFixes();
+    </script>
+    
+
+</body>
+</html>
